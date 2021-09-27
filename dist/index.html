@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gooday</title>
-</head>
-<body>
-    <div id="content">
-        
+    <!-- Box Icons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <i class="bx bxs-left-arrow">GooDAY</i>
+      </header>
+      <section class="location">
+        <p class="get-location">Please enter a valid city name</p>
+        <input type="text" placeholder="Enter city name" spellcheck="true" />
+        <div class="separator"></div>
+        <button>Get Device Location</button>
+      </section>
     </div>
+
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
