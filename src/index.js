@@ -57,6 +57,7 @@ function weatherDetails(info) {
     const city = info.name;
     const { country } = info.sys;
     const { description, id } = info.weather[0];
+    // eslint-disable-next-line camelcase
     const { temp, feels_like, humidity } = info.main;
 
     if (id === 800) {
