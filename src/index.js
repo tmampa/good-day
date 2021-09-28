@@ -24,32 +24,32 @@ locationBtn.addEventListener('click', () => {
   }
 });
 
-function requestApi(city) {
+const requestApi = (city) => {
   api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   fetchData();
-}
+};
 
-function onSuccess(position) {
+const onSuccess = (position) => {
   const { latitude, longitude } = position.coords;
   api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
   fetchData();
-}
+};
 
-function onError(error) {
+const onError = (error) => {
   infoTxt.innerText = error.message;
   infoTxt.classList.add('error');
-}
+};
 
-function fetchData() {
+const fetchData = () => {
   infoTxt.innerText = 'Getting weather details...';
   infoTxt.classList.add('pending');
   fetch(api).then((res) => res.json()).then((result) => weatherDetails(result)).catch(() => {
     infoTxt.innerText = 'Something went wrong';
     infoTxt.classList.replace('pending', 'error');
   });
-}
+};
 
-function weatherDetails(info) {
+const weatherDetails = (info) => {
   if (info.cod === '404') {
     infoTxt.classList.replace('pending', 'error');
     infoTxt.innerText = `${inputField.value} isn't a valid city name`;
@@ -84,7 +84,7 @@ function weatherDetails(info) {
     inputField.value = '';
     wrapper.classList.add('active');
   }
-}
+};
 
 arrowBack.addEventListener('click', () => {
   wrapper.classList.remove('active');
