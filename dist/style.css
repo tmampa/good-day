@@ -3,6 +3,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #1569d6;
+  color: #fff;
 }
 
 h1 {
@@ -20,7 +21,27 @@ span {
   display: flex;
 }
 
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin-top: 80px;
+  left: 25%;
+}
 
+input {
+  width: 350px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.fa-search {
+  color: #fff;
+  font-size: 20px;
+}
 
 .weatherInfo {
   display: flex;
@@ -31,6 +52,8 @@ span {
   top: 25%;
   left: 20%;
   z-index: 1;
+  border: 1px solid #6fccff;
+  padding: 20px;
 }
 
 .cardTop {
@@ -116,7 +139,7 @@ span {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: rgb(255, 255, 255);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -128,7 +151,7 @@ span {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: rgb(27, 27, 27);
   -webkit-transition: .4s;
   transition: .4s;
 }
