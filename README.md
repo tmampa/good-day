@@ -11,6 +11,7 @@
 - Html5
 - CSS3
 - Javascript
+- OpenWeatherMap API
 
 # live demo
 Soon
