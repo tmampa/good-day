@@ -1,197 +1,211 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-*{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #43AFFC;
-}
-::selection{
-  color: #fff;
-  background: #43AFFC;
-}
-.wrapper{
-  width: 400px;
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.05);
-}
-.wrapper header{
-  display: flex;
-  font-size: 21px;
-  font-weight: 500;
-  color: #43AFFC;
-  padding: 16px 15px;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
-}
-header i{
-  font-size: 0em;
-  cursor: pointer;
-  margin-right: 8px;
-}
-.wrapper.active header i{
-  margin-left: 5px;
-  font-size: 30px;
-}
-.wrapper .input-part{
-  margin: 20px 25px 30px;
-}
-.wrapper.active .input-part{
-  display: none;
-}
-.input-part .info-txt{
-  display: none;
-  font-size: 17px;
-  text-align: center;
-  padding: 12px 10px;
-  border-radius: 7px;
-  margin-bottom: 15px;
-}
-.input-part .info-txt.error{
-  color: #721c24;
-  display: block;
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-}
-.input-part .info-txt.pending{
-  color: #0c5460;
-  display: block;
-  background: #d1ecf1;
-  border: 1px solid #bee5eb;
-}
-.input-part :where(input, button){
-  width: 100%;
-  height: 55px;
-  border: none;
-  outline: none;
-  font-size: 18px;
-  border-radius: 7px;
-}
-.input-part input{
-  text-align: center;
-  padding: 0 15px;
-  border: 1px solid #ccc;
-}
-.input-part input:is(:focus, :valid){
-  border: 2px solid #43AFFC;
-}
-.input-part input::placeholder{
-  color: #bfbfbf;
-}
-.input-part .separator{
-  height: 1px;
-  width: 100%;
-  margin: 25px 0;
-  background: #ccc;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.separator::before{
-  content: "or";
-  color: #b3b3b3;
-  font-size: 19px;
-  padding: 0 15px;
-  background: #fff;
-}
-.input-part button{
-  color: #fff;
-  cursor: pointer;
-  background: #43AFFC;
-  transition: 0.3s ease;
-}
-.input-part button:hover{
-  background: #1d9ffc;
+  background-color: #1569d6;
 }
 
-.wrapper .weather-part{
-  display: none;
-  margin: 30px 0 0;
-  align-items: center;
-  justify-content: center;
+h1 {
+  margin: 1% 0;
+  font-size: 4em;
+  font-family: 'Domine', serif;
+}
+
+span {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+}
+
+
+
+.weatherInfo {
+  display: flex;
   flex-direction: column;
+  height: 60%;
+  width: 50%;
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  z-index: 1;
 }
-.wrapper.active .weather-part{
+
+.cardTop {
   display: flex;
+  text-align: left;
+  flex-direction: column;
+  padding-left: 1%;
 }
-.weather-part img{
-  max-width: 125px;
-}
-.weather-part .temp{
+
+.cardLeft {
   display: flex;
-  font-weight: 500;
-  font-size: 72px;
+  flex-direction: row;
+  position: relative;
 }
-.weather-part .temp .numb{
-  font-weight: 600;
-}
-.weather-part .temp .deg{
-  font-size: 40px;
-  display: block;
-  margin: 10px 5px 0 0;
-}
-.weather-part .weather{
-  font-size: 21px;
-  text-align: center;
-  margin: -5px 20px 15px;
-}
-.weather-part .location{
+
+.cardRight {
   display: flex;
-  font-size: 19px;
-  padding: 0 20px;
-  text-align: center;
-  margin-bottom: 30px;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* position: absolute;
+  left: 28%;
+  top: 38%; */
+  height: 65%;
+  margin-top: 4%;
+  width: 80%;
+  padding-left: 2%;
+  margin-left: 2%;
+  border-left: 0.2rem solid rgba(0, 0, 0, 1);
 }
-.location i{
-  font-size: 22px;
-  margin: 4px 5px 0 0;
+
+/* .cardRight>span {
+  margin: 1% 0;
+} */
+.temp {
+  font-size: 8em;
+  text-align: left;
 }
-.weather-part .bottom-details{
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  border-top: 1px solid #ccc;
+
+.weatherCondition {
+  font-size: 1.5em;
 }
-.bottom-details .column{
-  display: flex;
-  width: 100%;
-  padding: 15px 0;
-  align-items: center;
-  justify-content: center;
+
+.gify {
+  position: absolute;
+  left: 55%;
+  top: 30%;
 }
-.column i{
-  color: #5DBBFF;
-  font-size: 40px;
+
+.add:hover,
+.add:focus {
+  transform: scale(1.2) rotate(-5deg);
 }
-.column.humidity{
-  border-left: 1px solid #ccc;
+
+.deg {
+  font-size: 2rem;
+  position: absolute;
+  top: 2%;
+  left: 17%;
 }
-.column .details{
-  margin-left: 3px;
+
+/* Switch Toggle */
+.toggle {
+  padding-left: 1%;
 }
-.details .temp, .humidity span{
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: -3px;
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
-.details .temp .deg{
-  margin: 0;
-  font-size: 17px;
-  padding: 0 2px 0 1px;
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-.column .details p{
-  font-size: 14px;
-  margin-top: -6px;
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
-.humidity i{
-  font-size: 37px;
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #6fccff;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #6fccff;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Media Queries */
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 3em;
+  }
+  .search {
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    height: 5%;
+    position: static;
+    left: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    margin: 5% auto;
+  }
+
+  .search>span {
+    font-size: 0.9em;
+    align-self: center;
+    margin-right: 2%;
+  }
+
+  .container {
+    width: 100vw;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .weatherInfo {
+    left: 15%;
+  }
+
+  .cardRight {
+    padding-left: 5%;
+    margin-left: 7%;
+    margin-top: 6%;
+  }
+
+  .cardLeft {
+    width: 80vw;
+  }
+
+  .deg {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 2%;
+    left: 30%;
+  }
+
+  .gify {
+  position: static;
+  margin-top: 50%;
+  }
+
+  .temp {
+    font-size: 6em;
+    text-align: left;
+  }
 }

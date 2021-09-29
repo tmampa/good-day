@@ -1,91 +1,89 @@
-const wrapper = document.querySelector('.wrapper');
-const inputPart = document.querySelector('.input-part');
-const infoTxt = inputPart.querySelector('.info-txt');
-const inputField = inputPart.querySelector('input');
-const locationBtn = inputPart.querySelector('button');
-const weatherPart = wrapper.querySelector('.weather-part');
-const wIcon = weatherPart.querySelector('img');
-const arrowBack = wrapper.querySelector('header i');
-const apiKey = '5b1f0a980bd35cdef966b7da15d9b7f5';
+const cityName = document.querySelector('.city');
+const weatherCondition = document.querySelector('.weatherCondition');
+const temp = document.querySelector('.temp');
+const feelsLike = document.querySelector('.feelsLike');
+const max = document.querySelector('.tempMax');
+const humidity = document.querySelector('.humidty');
+const deg = document.querySelector('.deg');
+const input = document.querySelector('.searchBar');
+const submit = document.querySelector('.add');
+const slider = document.querySelector('.toggleF');
+const img = document.querySelector('.weatherImage');
+const body = document.querySelector('body');
 
-let api;
+async function getWeather(location) {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=d3038b3303b62168dd448fbeb4531d41`, { mode: 'cors' });
+  const data = await response.json();
+  const a = data.name;
+  const b = data.main.temp;
+  const c = data.main.feels_like;
+  const d = data.weather[0].description;
+  const e = data.main.humidity;
+  const f = data.main.temp_max;
+  buildPage(a, b, c, d, e, f);
+}
 
-inputField.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter' && inputField.value !== '') {
-    requestApi(inputField.value);
+getWeather('Auckland');
+
+async function toggleFarenheight() {
+  const location = cityName.textContent;
+  const unit = checkState();
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=${unit}&appid=d3038b3303b62168dd448fbeb4531d41`, { mode: 'cors' });
+  const data = await response.json();
+  const a = data.name;
+  const b = data.main.temp;
+  const c = data.main.feels_like;
+  const d = data.weather[0].description;
+  const e = data.main.humidity;
+  const f = data.main.temp_max;
+  buildPage(a, b, c, d, e, f);
+  changeDef();
+}
+
+const buildPage = (place, t, feels, desc, humid, m) => {
+  desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+  cityName.textContent = place;
+  weatherCondition.textContent = desc;
+  temp.textContent = Math.round(t);
+  feelsLike.textContent = `Feels like: ${Math.round(feels)}°`;
+  max.textContent = `Today's high: ${Math.round(m)}°`;
+  humidity.textContent = `Humidty: ${humid}%`;
+};
+
+// eslint-disable-next-line consistent-return
+const checkState = () => {
+  if (slider.checked === true) {
+    this.x = 'imperial';
+    return this.x;
+  } if (slider.checked === false) {
+    this.x = 'metric';
+    return this.x;
+  }
+};
+
+const changeDef = () => {
+  if (slider.checked === true) {
+    deg.textContent = '°F';
+  } else if (slider.checked === false) {
+    deg.textContent = '°C';
+  }
+};
+
+submit.addEventListener('click', () => {
+  getWeather(input.value);
+});
+
+input.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    submit.click();
   }
 });
 
-locationBtn.addEventListener('click', () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  } else {
-    alert('Your browser not support geolocation api');
-  }
+input.addEventListener('click', () => {
+  input.value = '';
 });
 
-const requestApi = (city) => {
-  api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-  fetchData();
-};
-
-const onSuccess = (position) => {
-  const { latitude, longitude } = position.coords;
-  api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-  fetchData();
-};
-
-const onError = (error) => {
-  infoTxt.innerText = error.message;
-  infoTxt.classList.add('error');
-};
-
-const fetchData = () => {
-  infoTxt.innerText = 'Getting weather details...';
-  infoTxt.classList.add('pending');
-  fetch(api).then((res) => res.json()).then((result) => weatherDetails(result)).catch(() => {
-    infoTxt.innerText = 'Something went wrong';
-    infoTxt.classList.replace('pending', 'error');
-  });
-};
-
-const weatherDetails = (info) => {
-  if (info.cod === '404') {
-    infoTxt.classList.replace('pending', 'error');
-    infoTxt.innerText = `${inputField.value} isn't a valid city name`;
-  } else {
-    const city = info.name;
-    const { country } = info.sys;
-    const { description, id } = info.weather[0];
-    // eslint-disable-next-line camelcase
-    const { temp, feels_like, humidity } = info.main;
-
-    if (id === 800) {
-      wIcon.src = 'icons/clear-day.svg';
-    } else if (id >= 200 && id <= 232) {
-      wIcon.src = 'icons/thunderstorms.svg';
-    } else if (id >= 600 && id <= 622) {
-      wIcon.src = 'icons/snow.svg';
-    } else if (id >= 701 && id <= 781) {
-      wIcon.src = 'icons/haze.svg';
-    } else if (id >= 801 && id <= 804) {
-      wIcon.src = 'icons/cloudy.svg';
-    } else if ((id >= 500 && id <= 531) || (id >= 300 && id <= 321)) {
-      wIcon.src = 'icons/rain.svg';
-    }
-
-    weatherPart.querySelector('.temp .numb').innerText = Math.floor(temp);
-    weatherPart.querySelector('.weather').innerText = description;
-    weatherPart.querySelector('.location span').innerText = `${city}, ${country}`;
-    weatherPart.querySelector('.temp .numb-2').innerText = Math.floor(feels_like);
-    weatherPart.querySelector('.humidity span').innerText = `${humidity}%`;
-    infoTxt.classList.remove('pending', 'error');
-    infoTxt.innerText = '';
-    inputField.value = '';
-    wrapper.classList.add('active');
-  }
-};
-
-arrowBack.addEventListener('click', () => {
-  wrapper.classList.remove('active');
+slider.addEventListener('click', () => {
+  toggleFarenheight();
 });
