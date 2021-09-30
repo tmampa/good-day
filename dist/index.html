@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gooday</title>
+  <meta charset="utf-8">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
+
 <body>
-    <div id="content">
-        
+  <div class="search">
+    <i class="fas fa-search add"></i>
+    <input class="searchBar" type="text" placeholder="Search city">
+  </div>
+
+  <div class="container">
+    <div class="weatherInfo">
+      <div class="cardTop">
+        <span class="weatherCondition"></span>
+        <h1 class="city"></h1>
+      </div>
+      <div class="cardLeft">
+        <span class="temp"></span>
+        <span class="deg">°C</span>
+        <div class="cardRight">
+          <span class="feelsLike"></span>
+          <span class="tempMax"></span>
+          <span class="humidty"></span></span>
+        </div>
+      </div>
+
+      <div class="toggle">
+        <label class="switch">
+          <input class="toggleF" type="checkbox">
+          <span class="slider"></span>
+        </label>
+
+      </div>
+
+
     </div>
-    <script src="main.js"></script>
+  </div>
+
+  <script src="main.js" charset="utf-8"></script>
 </body>
+
 </html>
